@@ -1,5 +1,5 @@
 server:
-  port: 8082
+  port: 8083
 spring:
   application:
     name: takeout
@@ -17,6 +17,5 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: ASSIGN_ID
-web:
-  resources:
-    static-locations: classpath:static/,classpath:/templates/
+takeout:
+  path: D:\fileSave
