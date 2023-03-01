@@ -11,6 +11,7 @@ import org.hibernate.annotations.Table;
 import javax.persistence.Entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * 地址簿
@@ -75,12 +76,12 @@ public class AddressBook implements Serializable {
 
     //创建时间
     @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
+    private Date createTime;
 
 
     //更新时间
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
 
     //创建人

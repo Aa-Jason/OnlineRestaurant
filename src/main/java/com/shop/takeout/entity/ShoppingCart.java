@@ -4,6 +4,7 @@ import lombok.Data;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * 购物车
@@ -39,5 +40,5 @@ public class ShoppingCart implements Serializable {
     //图片
     private String image;
 
-    private LocalDateTime createTime;
+    private Date createTime;
 }

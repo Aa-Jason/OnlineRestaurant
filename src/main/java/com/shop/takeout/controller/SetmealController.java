@@ -1,0 +1,107 @@
+package com.shop.takeout.controller;
+
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.api.R;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.shop.takeout.common.ResultUtil;
+import com.shop.takeout.dto.SetmealDto;
+import com.shop.takeout.entity.Category;
+import com.shop.takeout.entity.Setmeal;
+import com.shop.takeout.service.CategoryService;
+import com.shop.takeout.service.SetmealDishService;
+import com.shop.takeout.service.SetmealService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * 套餐管理
+ */
+@Slf4j
+@RequestMapping("/setmeal")
+@RestController
+public class SetmealController {
+    @Autowired
+    private SetmealDishService setmealDishService;
+
+    @Autowired
+    private SetmealService setmealService;
+
+    @Autowired
+    private CategoryService categoryService;
+
+    /**
+     * 新增套餐
+     * @param setmealDto
+     * @return
+     */
+    @PostMapping
+    public ResultUtil<String> save(@RequestBody SetmealDto setmealDto){
+        log.info("套餐信息：{}",setmealDto);
+        setmealService.saveWithDish(setmealDto);
+        return ResultUtil.success("新增套餐成功！");
+    }
+
+    /**
+     * 分页条件查询
+     * @param page
+     * @param pageSize
+     * @param name
+     * @return
+     */
+    @GetMapping("/page")
+    public ResultUtil<Page> page(int page, int pageSize, String name) {
+        //设置分页构造器
+        Page<Setmeal> pageInfo = new Page<>(page, pageSize);
+        Page<SetmealDto> dtoPage = new Page<>();
+
+        //设置条件构造器
+        LambdaQueryWrapper<Setmeal> lqw = new LambdaQueryWrapper<>();
+        lqw.like(name != null,Setmeal::getName,name)
+                .orderByDesc(Setmeal::getUpdateTime);
+        //执行查询
+        setmealService.page(pageInfo,lqw);
+
+        //拷贝分页数据
+        BeanUtils.copyProperties(pageInfo,dtoPage,"records");
+        List<Setmeal> records = pageInfo.getRecords();
+
+        //处理records数据的拷贝
+        List<SetmealDto> list = records.stream().map((item) -> {
+            SetmealDto setmealDto = new SetmealDto();
+            BeanUtils.copyProperties(item,setmealDto);
+            //套餐的分类id
+            Long categoryId = item.getCategoryId();
+
+            //根据id查询分类名称
+            Category category = categoryService.getById(categoryId);
+            String categoryName = category.getName();
+
+            //设置分类名称
+            setmealDto.setCategoryName(categoryName);
+            return setmealDto;
+
+        }).collect(Collectors.toList());
+
+        //设置records
+        dtoPage.setRecords(list);
+
+        return ResultUtil.success(dtoPage);
+    }
+
+    /**
+     * 删除，批量删除套餐
+     * @param ids
+     * @return
+     */
+    @DeleteMapping
+    public ResultUtil<String> delete(@RequestBody List<Long> ids){
+        setmealService.removeWithDish(ids);
+        return ResultUtil.success("删除成功");
+    }
+
+}

@@ -44,6 +44,5 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         //删除分类
         super.removeById(id);
 
-
     }
 }
