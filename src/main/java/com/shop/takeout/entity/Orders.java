@@ -4,6 +4,7 @@ import lombok.Data;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * 订单
@@ -30,11 +31,11 @@ public class Orders implements Serializable {
 
 
     //下单时间
-    private LocalDateTime orderTime;
+    private Date orderTime;
 
 
     //结账时间
-    private LocalDateTime checkoutTime;
+    private Date checkoutTime;
 
 
     //支付方式 1微信，2支付宝

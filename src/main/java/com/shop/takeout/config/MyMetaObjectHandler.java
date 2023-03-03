@@ -20,8 +20,11 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         metaObject.setValue("createTime",new Date());
         metaObject.setValue("updateTime",new Date());
-        metaObject.setValue("createUser", BaseContext.getCurrentId());
-        metaObject.setValue("updateUser",BaseContext.getCurrentId());
+        log.info("id:{}",BaseContext.getCurrentId());
+//        metaObject.setValue("createUser", BaseContext.getCurrentId());
+//        metaObject.setValue("updateUser",BaseContext.getCurrentId());
+        this.strictInsertFill(metaObject,"updateUser",Long.class,BaseContext.getCurrentId());
+        this.strictInsertFill(metaObject,"createUser",Long.class,BaseContext.getCurrentId());
     }
 
     /**
@@ -30,7 +33,12 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
      */
     @Override
     public void updateFill(MetaObject metaObject) {
-        metaObject.setValue("updateTime", new Date());
-        metaObject.setValue("updateUser",BaseContext.getCurrentId());
+//        metaObject.setValue("updateTime", new Date());
+//        metaObject.setValue("updateUser",BaseContext.getCurrentId());
+        log.info("id:{}",BaseContext.getCurrentId());
+        this.strictInsertFill(metaObject,"updateUser",Long.class,BaseContext.getCurrentId());
+        this.strictInsertFill(metaObject,"updateTime",Date.class,new Date());
+        this.strictInsertFill(metaObject,"updateUser",Long.class,BaseContext.getCurrentId());
+
     }
 }
