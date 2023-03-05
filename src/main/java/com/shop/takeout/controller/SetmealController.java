@@ -13,8 +13,13 @@ import com.shop.takeout.service.SetmealService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,12 +39,16 @@ public class SetmealController {
     @Autowired
     private CategoryService categoryService;
 
+    @Resource
+    private CacheManager cacheManager;
+
     /**
      * 新增套餐
      * @param setmealDto
      * @return
      */
     @PostMapping
+    @CacheEvict(value = "setmealCache",allEntries = true)
     public ResultUtil<String> save(@RequestBody SetmealDto setmealDto){
         log.info("套餐信息：{}",setmealDto);
         setmealService.saveWithDish(setmealDto);
@@ -99,12 +108,14 @@ public class SetmealController {
      * @return
      */
     @DeleteMapping
+    @CacheEvict(value = "setmealCache",allEntries = true)
     public ResultUtil<String> delete(@RequestBody List<Long> ids){
         setmealService.removeWithDish(ids);
         return ResultUtil.success("删除成功");
     }
 
     @GetMapping("/list")
+    @Cacheable(value = "setmealCache",key = "#setmeal.categoryId + '_' + #setmeal.status")
     public ResultUtil<List<Setmeal>> list( Setmeal setmeal){
         LambdaQueryWrapper<Setmeal> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(setmeal.getCategoryId() != null,Setmeal::getCategoryId,setmeal.getCategoryId());

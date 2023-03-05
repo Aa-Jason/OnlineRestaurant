@@ -14,8 +14,9 @@ spring:
     # 数据库索引 默认0
     database: 0
     port: 6379
-    # 超时时间 Duration类型 3秒
-    timeout: 3S
+  cache:
+    redis:
+      time-to-live: 1800000
 mybatis-plus:
   configuration:
     #在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射
