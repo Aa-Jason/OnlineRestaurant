@@ -3,31 +3,37 @@ server:
 spring:
   application:
     name: takeout
-  shardingsphere:
-    datasource:
-      names: master,slave
-      master:
-        type: com.alibaba.druid.pool.DruidDataSource
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://192.168.80.130.100:3306/takeout?characterEncoding=utf-8&&useSSL=false
-        username: root
-        password: xqp
-      slave:
-        type: com.alibaba.druid.pool.DruidDataSource
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://192.168.80.130.101:3306/takeout?characterEncoding=utf-8&&useSSL=false
-        username: root
-        password: xqp
-    masterslave:
-      load-balance-algorithm-type: round_robin
-      name: dataSource
-      master-data-source-name: master
-      slave-data-source-names: slave
-    props:
-      sql:
-        show: true
-  main:
-    allow-bean-definition-overriding: true
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/takeout?characterEncoding=utf-8&&serverTimezone=UTC&&useSSL=false
+    username: root
+    password: xqp
+#  shardingsphere:
+#    datasource:
+#      names: master,slave
+#      master:
+#        type: com.alibaba.druid.pool.DruidDataSource
+#        driver-class-name: com.mysql.cj.jdbc.Driver
+#        url: jdbc:mysql://192.168.80.130.100:3306/takeout?characterEncoding=utf-8&&useSSL=false
+#        username: root
+#        password: xqp
+#      slave:
+#        type: com.alibaba.druid.pool.DruidDataSource
+#        driver-class-name: com.mysql.cj.jdbc.Driver
+#        url: jdbc:mysql://192.168.80.128.101:3306/takeout?characterEncoding=utf-8&&useSSL=false
+#        username: root
+#        password: xqp
+#    masterslave:
+#      load-balance-algorithm-type: round_robin
+#      name: dataSource
+#      master-data-source-name: master
+#      slave-data-source-names: slave
+#    props:
+#      sql:
+#        show: true
+#  main:
+#    allow-bean-definition-overriding: true
   redis:
     host: 127.0.0.1
     # 数据库索引 默认0
