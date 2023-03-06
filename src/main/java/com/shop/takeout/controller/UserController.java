@@ -9,6 +9,8 @@ import com.shop.takeout.service.UserService;
 import com.shop.takeout.utils.HanZiUtil;
 import com.shop.takeout.utils.SMSUtils;
 import com.shop.takeout.utils.ValidateCodeUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -22,7 +24,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-
+@Api(tags = "客户接口")
 @Slf4j
 @RestController
 @RequestMapping("/user")
@@ -34,6 +36,7 @@ public class UserController {
     @Resource
     private RedisTemplate redisTemplate;
 
+    @ApiOperation(value = "发送验证码")
     @PostMapping("/sendMsg")
     public ResultUtil<String> sendMsg(@RequestBody User user, HttpSession session){
         //获取手机号

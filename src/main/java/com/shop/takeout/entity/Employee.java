@@ -2,6 +2,7 @@ package com.shop.takeout.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import org.hibernate.annotations.FilterJoinTable;
 
@@ -13,6 +14,7 @@ import java.util.Date;
 
 
 @Data
+@ApiModel("雇员信息")
 public class Employee implements Serializable {
 
     private static final long serialVersionUID = 1L;

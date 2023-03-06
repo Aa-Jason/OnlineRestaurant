@@ -40,7 +40,11 @@ public class LoginCheckFilter implements Filter {
                 "/front/**",
                 "/user/sendMsg",
                 "/user/login",
-                "/swagger*"
+                "/swagger-resources",
+                "/webjars/**",
+                "/doc.html",
+                "/v2/api-docs",
+                "common/**"
         };
         boolean check = checkPath(urls, requestURI);
         if (check) {

@@ -1,5 +1,6 @@
 package com.shop.takeout.entity;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -10,6 +11,7 @@ import java.util.Date;
  * 购物车
  */
 @Data
+@ApiModel("购物车")
 public class ShoppingCart implements Serializable {
 
     private static final long serialVersionUID = 1L;

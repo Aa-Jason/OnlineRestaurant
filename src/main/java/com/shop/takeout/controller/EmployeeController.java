@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.shop.takeout.common.ResultUtil;
 import com.shop.takeout.entity.Employee;
 import com.shop.takeout.service.EmployeeService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+@Api(tags = "雇员接口")
 @Slf4j
 @RestController
 @RequestMapping("/employee")

@@ -10,6 +10,8 @@ import com.shop.takeout.entity.Setmeal;
 import com.shop.takeout.service.CategoryService;
 import com.shop.takeout.service.SetmealDishService;
 import com.shop.takeout.service.SetmealService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,7 @@ import java.util.stream.Collectors;
 /**
  * 套餐管理
  */
+@Api(tags = "套餐管理")
 @Slf4j
 @RequestMapping("/setmeal")
 @RestController
@@ -47,6 +50,7 @@ public class SetmealController {
      * @param setmealDto
      * @return
      */
+    @ApiOperation("新增套餐")
     @PostMapping
     @CacheEvict(value = "setmealCache",allEntries = true)
     public ResultUtil<String> save(@RequestBody SetmealDto setmealDto){
@@ -62,6 +66,7 @@ public class SetmealController {
      * @param name
      * @return
      */
+    @ApiOperation(value = "分页条件查询")
     @GetMapping("/page")
     public ResultUtil<Page> page(int page, int pageSize, String name) {
         //设置分页构造器
@@ -107,6 +112,7 @@ public class SetmealController {
      * @param ids
      * @return
      */
+    @ApiOperation(value = "删除套餐")
     @DeleteMapping
     @CacheEvict(value = "setmealCache",allEntries = true)
     public ResultUtil<String> delete(@RequestBody List<Long> ids){

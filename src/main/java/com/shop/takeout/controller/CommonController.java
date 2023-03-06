@@ -1,6 +1,7 @@
 package com.shop.takeout.controller;
 
 import com.shop.takeout.common.ResultUtil;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import java.util.UUID;
 /**
  * 文件上传和下载
  */
+@Api(tags = "文件上传与下载")
 @RestController
 @RequestMapping("/common")
 @Slf4j

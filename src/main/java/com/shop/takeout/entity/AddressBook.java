@@ -2,6 +2,8 @@ package com.shop.takeout.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.hibernate.annotations.DynamicInsert;
@@ -17,6 +19,7 @@ import java.util.Date;
  * 地址簿
  */
 @Data
+@ApiModel("地址簿")
 public class AddressBook implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,7 +31,7 @@ public class AddressBook implements Serializable {
     private Long userId;
 
 
-    //收货人
+    @ApiModelProperty("收货人")
     private String consignee;
 
 
@@ -40,7 +43,8 @@ public class AddressBook implements Serializable {
     private String sex;
 
 
-    //省级区划编号
+
+    @ApiModelProperty("省级划分编号")
     private String provinceCode;
 
 
@@ -48,7 +52,7 @@ public class AddressBook implements Serializable {
     private String provinceName;
 
 
-    //市级区划编号
+    @ApiModelProperty("市级划分编号")
     private String cityCode;
 
 
@@ -56,7 +60,7 @@ public class AddressBook implements Serializable {
     private String cityName;
 
 
-    //区级区划编号
+    @ApiModelProperty("区级划分编号")
     private String districtCode;
 
 

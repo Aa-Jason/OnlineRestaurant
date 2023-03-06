@@ -1,5 +1,6 @@
 package com.shop.takeout.entity;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.io.Serializable;
  * 用户信息
  */
 @Data
+@ApiModel("顾客信息")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;

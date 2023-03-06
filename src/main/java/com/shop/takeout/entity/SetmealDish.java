@@ -2,6 +2,7 @@ package com.shop.takeout.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -12,6 +13,7 @@ import java.util.Date;
  * 套餐菜品关系
  */
 @Data
+@ApiModel("套餐菜品关系")
 public class SetmealDish implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -11,6 +11,8 @@ import com.shop.takeout.entity.DishFlavor;
 import com.shop.takeout.service.CategoryService;
 import com.shop.takeout.service.DishFlavorService;
 import com.shop.takeout.service.DishService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,7 @@ import java.util.stream.Collectors;
 /**
  * 菜品管理
  */
+@Api(tags = "菜品管理")
 @RestController
 @Slf4j
 @RequestMapping("/dish")
@@ -48,6 +51,7 @@ public class DishController {
      * @param dishDto
      * @return
      */
+    @ApiOperation(value = "新增菜品")
     @PostMapping
     public ResultUtil<String> save(@RequestBody DishDto dishDto) {
         log.info(dishDto.toString());
@@ -65,6 +69,7 @@ public class DishController {
      * @param name
      * @return
      */
+    @ApiOperation(value = "分页查询")
     @GetMapping("/page")
     public ResultUtil<Page> page(int page, int pageSize, String name) {
         //设置分页构造器
@@ -107,6 +112,7 @@ public class DishController {
      * @param id
      * @return
      */
+    @ApiOperation(value = "根据id查询")
     @GetMapping("/id")
     public ResultUtil<DishDto> get(@PathVariable Long id) {
         DishDto dishDto = dishService.getByIdWithFlavor(id);
@@ -119,6 +125,7 @@ public class DishController {
      * @param dishDto
      * @return
      */
+    @ApiOperation(value = "修改菜品")
     @PutMapping
     public ResultUtil<String> update(@RequestBody DishDto dishDto) {
 //        log.info(dishDto.toString());
@@ -143,6 +150,7 @@ public class DishController {
 //            List<Dish> list = dishService.list(queryWrapper);
 //            return ResultUtil.success(list);
 //    }
+    @ApiOperation(value = "条件查询")
     @GetMapping("/list")
     public ResultUtil<List<DishDto>> list(Dish dish) {
         List<DishDto> dishDtoList = null;

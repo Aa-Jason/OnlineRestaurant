@@ -6,6 +6,8 @@ import com.shop.takeout.common.ResultUtil;
 import com.shop.takeout.config.BaseContext;
 import com.shop.takeout.entity.ShoppingCart;
 import com.shop.takeout.service.ShoppingCartService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
 
+@Api(tags = "购物车")
 @Slf4j
 @RequestMapping("/shoppingCart")
 @RestController
@@ -26,6 +29,7 @@ public class ShoppingCartController {
      * @param shoppingCart
      * @return
      */
+    @ApiOperation(value = "添加购物车")
     @PostMapping("/add")
     public ResultUtil<ShoppingCart> add(@RequestBody ShoppingCart shoppingCart){
         log.info("购物车：{}",shoppingCart);
@@ -61,6 +65,7 @@ public class ShoppingCartController {
         return ResultUtil.success(cartServiceOne);
     }
 
+    @ApiOperation(value = "购物车展示")
     @GetMapping("/list")
     public ResultUtil<List<ShoppingCart>> list(){
         LambdaQueryWrapper<ShoppingCart> queryWrapper = new LambdaQueryWrapper<>();
@@ -75,6 +80,7 @@ public class ShoppingCartController {
      * 清空购物车
      * @return
      */
+    @ApiOperation(value = "清空购物车")
     @DeleteMapping("/clean")
     public ResultUtil<String> clean(){
         LambdaQueryWrapper<ShoppingCart> queryWrapper = new LambdaQueryWrapper<>();
